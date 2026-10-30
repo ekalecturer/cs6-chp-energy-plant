@@ -1,0 +1,42 @@
+{
+  "case_study": 6,
+  "slug": "cs6-chp-energy-plant",
+  "citation": "Maric, B., Grozdic, V. (2016). Monte Carlo Simulation in Valuation of Investment Projects. Proceedings of the 27th DAAAM International Symposium, pp.0686-0692.",
+  "confirmed_paper_figures": {
+    "deterministic_npv_eur_m": 598.5,
+    "deterministic_irr_pct": 35,
+    "discount_rate_pct": 9,
+    "project_years": 20,
+    "construction_years": 4,
+    "payback_years_incl_construction": 7,
+    "mc_trials": 50000,
+    "mc_mean_npv_eur_m": 172.9,
+    "mc_median_npv_eur_m": 172.3,
+    "mc_std_npv_eur_m": 160.2,
+    "mc_cv_npv": 0.9266,
+    "mc_min_npv_eur_m": -484,
+    "mc_max_npv_eur_m": 832.4,
+    "mc_mean_irr_pct": 19,
+    "mc_std_irr_pct": 8,
+    "mc_cv_irr": 0.4337,
+    "p_npv_positive_pct": 86.1,
+    "p_irr_clears_hurdle_pct": 91.1
+  },
+  "reconstruction_output": {
+    "mean_npv_eur_m": 271.4,
+    "median_npv_eur_m": 310.56,
+    "std_npv_eur_m": 251.44,
+    "cv_npv": 0.9265,
+    "p_npv_positive_pct": 83.39,
+    "p_npv_below_deterministic_pct": 93.32,
+    "mean_irr_pct": 13.53,
+    "std_irr_pct": 5.09,
+    "cv_irr": 0.3762,
+    "p_irr_clears_hurdle_pct": 83.6,
+    "deterministic_npv_reconstructed_eur_m": 598.5,
+    "deterministic_irr_reconstructed_pct": 18.88,
+    "trials": 50000,
+    "seed": 42
+  },
+  "disclosure": "Distribution parameters, cash flow schedule, and correlation method are reconstructed, not sourced from the paper (which does not publish them). Deterministic case calibrated to match the paper's real EUR 598.5M NPV exactly. See markdown cells above for full detail."
+}

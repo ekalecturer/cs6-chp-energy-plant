@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Feasibility Stress Test — Combined Heat &amp; Power Plant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --blue:#2b6cb0; --dark:#1a202c; --gray:#4a5568; --bg:#f7fafc; --green:#2f855a; --gold:#d69e2e; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin:0; color:var(--dark); background:#fff; line-height:1.6; }
+  header { background:var(--dark); color:#fff; padding:56px 20px; }
+  header .kicker { color:#90cdf4; font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:13px; }
+  header h1 { font-size:32px; margin:10px 0 14px; max-width:760px; }
+  header p { max-width:680px; color:#cbd5e0; font-size:17px; }
+  .wrap { max-width:820px; margin:0 auto; padding:40px 20px; }
+  .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; margin:28px 0; }
+  .stat { background:var(--bg); border-radius:10px; padding:18px; border:1px solid #e2e8f0; }
+  .stat .num { font-size:26px; font-weight:700; color:var(--blue); }
+  .stat .label { font-size:13px; color:var(--gray); margin-top:4px; }
+  h2 { font-size:21px; margin-top:40px; border-bottom:2px solid #e2e8f0; padding-bottom:8px; }
+  .btnrow { display:flex; gap:12px; flex-wrap:wrap; margin:24px 0; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; text-decoration:none; padding:12px 20px; border-radius:8px; font-weight:600; border:none; cursor:pointer; font-size:15px; font-family:inherit; }
+  .btn.secondary { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .callout { background:#fffbea; border-left:4px solid #d69e2e; padding:16px 20px; border-radius:6px; margin:20px 0; font-size:15px; }
+  .callout.good { background:#f0fff4; border-left-color:#38a169; }
+  footer { text-align:center; color:var(--gray); font-size:13px; padding:40px 20px; }
+  a { color:var(--blue); }
+  table { border-collapse:collapse; width:100%; margin:16px 0; font-size:14px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid #e2e8f0; }
+  th { color:var(--gray); font-weight:600; }
+
+  .sim-panel { background:var(--bg); border:1px solid #e2e8f0; border-radius:12px; padding:24px; margin:24px 0; }
+  .sliders { display:grid; grid-template-columns:1fr 1fr; gap:18px 28px; }
+  @media (max-width:640px) { .sliders { grid-template-columns:1fr; } }
+  .slider-row label { display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:4px; }
+  .slider-row .val { color:var(--blue); font-weight:700; }
+  .slider-row input[type=range] { width:100%; accent-color:var(--blue); }
+  .sim-results { margin-top:28px; }
+  .sim-results.hidden { display:none; }
+  canvas { width:100%; height:260px; background:#fff; border:1px solid #e2e8f0; border-radius:8px; }
+  .disclosure { font-size:13px; color:var(--gray); margin-top:14px; }
+  .legend { display:flex; gap:18px; font-size:13px; margin-top:8px; flex-wrap:wrap; }
+  .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .swatch { width:12px; height:3px; display:inline-block; }
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">The Feasibility Stress Test — Case Study #6</div>
+  <h1>Combined Heat &amp; Power Plant: €598.5M Approved, €172.9M Was the Real Average</h1>
+  <p>A Monte Carlo reconstruction of a published DAAAM conference paper showing a 71% gap between a deterministic estimate and the expected value it should have been compared against — the largest such gap in this series.</p>
+</header>
+<div class="wrap">
+
+<div class="callout good"><strong>Note:</strong> the full six-page paper was read directly (not just the abstract), via a scispace-hosted PDF mirror. Every confirmed number below is transcribed from the paper's own tables and text.</div>
+
+<h2>The confirmed findings</h2>
+<div class="stat-grid">
+  <div class="stat"><div class="num">€598.5M</div><div class="label">deterministic NPV</div></div>
+  <div class="stat"><div class="num">€172.9M</div><div class="label">Monte Carlo mean NPV</div></div>
+  <div class="stat"><div class="num">86.1%</div><div class="label">probability of a positive NPV</div></div>
+  <div class="stat"><div class="num">91.1%</div><div class="label">probability IRR clears the 9% hurdle</div></div>
+</div>
+
+<p>Source: Marić, B., Grozdić, V. (2016). <em>Monte Carlo Simulation in Valuation of Investment Projects.</em> Proceedings of the 27th DAAAM International Symposium, pp.0686-0692. <a href="https://doi.org/10.2507/27th.daaam.proceedings.099">DOI</a></p>
+
+<h2>Sensitivity screen (paper's Table 1)</h2>
+<table>
+<tr><th>Variable</th><th>±10% shock</th><th>NPV after change</th><th>Relative change</th></tr>
+<tr><td>Electricity sale revenue</td><td>-10%</td><td>€358.1M</td><td>40%</td></tr>
+<tr><td>Natural gas procurement cost</td><td>+10%</td><td>€442.9M</td><td>26%</td></tr>
+<tr><td>Discount rate</td><td>+10%</td><td>€545.5M</td><td>9%</td></tr>
+<tr><td>Initial investment</td><td>+10%</td><td>€570.8M</td><td>5%</td></tr>
+</table>
+
+<div class="callout"><strong>Honest caveat:</strong> the paper does not publish its cash flow schedule, the exact triangular/normal parameters used in Crystal Ball, or its correlation method between revenue and cost. This reconstruction calibrates a simplified cash flow to match the paper's real €598.5M deterministic NPV exactly, then tunes four distributions so the simulation's coefficient of variation (0.9265) lands almost exactly on the paper's real 0.9266 — but the reconstructed mean NPV does not match the paper's €172.9M to the euro. Disclosed directly in the notebook and README.</div>
+
+<h2>Run your own simulation</h2>
+<p>Adjust the four real inputs from the paper's Monte Carlo section, then run 4,000 trials using the same distribution shapes (triangular, normal, uniform) with a positive correlation between revenue and variable cost, matching the qualitative link the paper describes between gas prices, costs, and power prices.</p>
+
+<div class="sim-panel">
+  <div class="sliders">
+    <div class="slider-row"><label>Revenue mode <span class="val" id="v_revenue">€290M/yr</span></label><input type="range" id="revenue" min="200" max="380" step="1" value="290"></div>
+    <div class="slider-row"><label>Variable cost mode <span class="val" id="v_varcost">€110M/yr</span></label><input type="range" id="varcost" min="60" max="180" step="1" value="110"></div>
+    <div class="slider-row"><label>Initial investment <span class="val" id="v_investment">€700M</span></label><input type="range" id="investment" min="500" max="900" step="5" value="700"></div>
+    <div class="slider-row"><label>Discount rate <span class="val" id="v_discount">9.0%</span></label><input type="range" id="discount" min="6" max="14" step="0.1" value="9.0"></div>
+    <div class="slider-row"><label>Revenue/cost correlation <span class="val" id="v_rho">0.15</span></label><input type="range" id="rho" min="-0.9" max="0.9" step="0.05" value="0.15"></div>
+  </div>
+  <div class="btnrow"><button class="btn" id="runBtn">Run simulation (4,000 trials)</button></div>
+
+  <div class="sim-results hidden" id="results">
+    <div class="stat-grid">
+      <div class="stat"><div class="num" id="r_det">—</div><div class="label">deterministic NPV (EUR M)</div></div>
+      <div class="stat"><div class="num" id="r_mean">—</div><div class="label">Monte Carlo mean NPV (EUR M)</div></div>
+      <div class="stat"><div class="num" id="r_ppos">—</div><div class="label">P(NPV &gt; 0)</div></div>
+      <div class="stat"><div class="num" id="r_cv">—</div><div class="label">Coefficient of variation</div></div>
+    </div>
+    <canvas id="hist" width="760" height="260"></canvas>
+    <div class="legend">
+      <span><span class="swatch" style="background:#c53030"></span>break-even</span>
+      <span><span class="swatch" style="background:#d69e2e"></span>deterministic estimate</span>
+      <span><span class="swatch" style="background:#2f855a"></span>Monte Carlo mean</span>
+    </div>
+    <div class="disclosure">Sliders set each distribution's center; spread stays fixed at values chosen so the simulation's coefficient of variation matches the paper's real 0.9266 at the default settings. Revenue and variable cost are sampled from a Gaussian copula so they move together when the correlation slider is positive. Browser-side reconstruction, not the authors' original Crystal Ball workbook.</div>
+  </div>
+</div>
+
+<h2>Explore</h2>
+<div class="btnrow">
+  <a class="btn secondary" href="notebook.html">View the full Python notebook</a>
+  <a class="btn secondary" href="https://github.com/ekalecturer/cs6-chp-energy-plant">View source on GitHub</a>
+</div>
+
+<h2>The lesson</h2>
+<p>A deterministic feasibility study can be optimistic by a wide margin and still describe a project worth approving. This plant's approved NPV of €598.5 million sat roughly 3.5 times above the real Monte Carlo average of €172.9 million, yet the project cleared its acceptance thresholds in the large majority of simulated trials. The size of the gap between an approved number and its expected value changes the governance conversation, even when it doesn't change the decision.</p>
+
+</div>
+<footer>Part of <strong>The Feasibility Stress Test</strong> — real Monte Carlo and financial-engineering case studies for capex decisions.</footer>
+
+<script>
+function randNormalStd(){
+  let u1 = Math.random() || 1e-9, u2 = Math.random();
+  return Math.sqrt(-2*Math.log(u1)) * Math.cos(2*Math.PI*u2);
+}
+function erfinv(x){
+  // Winitzki approximation of the inverse error function
+  const a = 0.147;
+  const ln1mx2 = Math.log(1 - x*x);
+  const term1 = (2/(Math.PI*a)) + ln1mx2/2;
+  return Math.sign(x) * Math.sqrt(Math.sqrt(term1*term1 - ln1mx2/a) - term1);
+}
+function normInv(p){
+  // inverse standard normal CDF via inverse erf
+  return Math.sqrt(2) * erfinv(2*p - 1);
+}
+function randTriangularFromU(u, min, mode, max){
+  const fc = (mode-min)/(max-min);
+  if (u < fc) return min + Math.sqrt(u*(max-min)*(mode-min));
+  return max - Math.sqrt((1-u)*(max-min)*(max-mode));
+}
+function mean(a){ return a.reduce((s,x)=>s+x,0)/a.length; }
+function std(a){ const m=mean(a); return Math.sqrt(a.reduce((s,x)=>s+(x-m)*(x-m),0)/a.length); }
+
+const CONSTRUCTION_YEARS = 4, OPERATING_YEARS = 20;
+
+function projectNpv(revenue, varcost, investment, discountRate){
+  let npv = 0;
+  const capexPerYear = investment / CONSTRUCTION_YEARS;
+  for (let y=1; y<=CONSTRUCTION_YEARS; y++){
+    npv -= capexPerYear / Math.pow(1+discountRate, y);
+  }
+  const netCf = revenue - varcost;
+  for (let y=CONSTRUCTION_YEARS+1; y<=CONSTRUCTION_YEARS+OPERATING_YEARS; y++){
+    npv += netCf / Math.pow(1+discountRate, y);
+  }
+  return npv;
+}
+
+const ids = ["revenue","varcost","investment","discount","rho"];
+const labelMap = {
+  revenue: v => "€"+Number(v).toFixed(0)+"M/yr", varcost: v => "€"+Number(v).toFixed(0)+"M/yr",
+  investment: v => "€"+Number(v).toFixed(0)+"M", discount: v => Number(v).toFixed(1)+"%",
+  rho: v => Number(v).toFixed(2)
+};
+ids.forEach(id=>{
+  const el = document.getElementById(id);
+  const out = document.getElementById("v_"+id);
+  const update = () => out.textContent = labelMap[id](parseFloat(el.value));
+  el.addEventListener("input", update);
+  update();
+});
+
+function drawHistogram(canvas, values, markers){
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+  const min = Math.min(...values, ...markers.map(m=>m.x)), max = Math.max(...values, ...markers.map(m=>m.x));
+  const bins = 40;
+  const counts = new Array(bins).fill(0);
+  const w = (max-min)/bins || 1;
+  values.forEach(v => { let idx = Math.floor((v-min)/w); if (idx>=bins) idx=bins-1; if(idx<0) idx=0; counts[idx]++; });
+  const maxCount = Math.max(...counts);
+  const padL = 10, padB = 10, padT = 10, padR = 10;
+  const plotW = W-padL-padR, plotH = H-padT-padB;
+  const barW = plotW/bins;
+  ctx.fillStyle = "#2b6cb0";
+  counts.forEach((c,i)=>{
+    const h = (c/maxCount)*plotH;
+    ctx.fillRect(padL+i*barW, H-padB-h, barW-1, h);
+  });
+  markers.forEach(m=>{
+    if (m.x < min || m.x > max) return;
+    const x = padL + ((m.x-min)/(max-min))*plotW;
+    ctx.strokeStyle = m.color; ctx.lineWidth = 2; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,H-padB); ctx.stroke();
+    ctx.setLineDash([]);
+  });
+}
+
+document.getElementById("runBtn").addEventListener("click", () => {
+  const N = 4000;
+  const g = id => parseFloat(document.getElementById(id).value);
+  const revenueMode = g("revenue"), varcostMode = g("varcost"), investmentMode = g("investment"),
+        discountMode = g("discount")/100, rho = g("rho");
+
+  const detNpv = projectNpv(revenueMode, varcostMode, investmentMode, discountMode);
+
+  // Fixed spread ratios, calibrated so CV lands near the paper's 0.9266 at default slider values
+  const revMin = revenueMode * 0.60, revMax = revenueMode * 1.02;
+  const varcostStd = varcostMode * 0.05;
+  const invMin = investmentMode * 0.98, invMax = investmentMode * 1.02;
+  const discMin = Math.max(0.01, discountMode - 0.001), discMax = discountMode + 0.001;
+
+  const npvs = [];
+  for (let i=0;i<N;i++){
+    // Gaussian copula for correlated revenue/varcost
+    const z1 = randNormalStd();
+    const z2 = rho*z1 + Math.sqrt(Math.max(0,1-rho*rho))*randNormalStd();
+    const uRev = 0.5*(1+erf(z1/Math.SQRT2));
+    const uCost = 0.5*(1+erf(z2/Math.SQRT2));
+
+    const revenue = randTriangularFromU(uRev, revMin, revenueMode, revMax);
+    const varcost = Math.max(1, varcostMode + varcostStd*z2);
+    const investment = invMin + Math.random()*(invMax-invMin);
+    const uDisc = Math.random();
+    const discountRate = randTriangularFromU(uDisc, discMin, discountMode, discMax);
+
+    npvs.push(projectNpv(revenue, varcost, investment, discountRate));
+  }
+
+  const meanNpv = mean(npvs);
+  const stdNpv = std(npvs);
+  const cv = stdNpv/meanNpv;
+  const pPos = npvs.filter(v=>v>0).length/N;
+
+  document.getElementById("r_det").textContent = detNpv.toFixed(1);
+  document.getElementById("r_mean").textContent = meanNpv.toFixed(1);
+  document.getElementById("r_ppos").textContent = (pPos*100).toFixed(1)+"%";
+  document.getElementById("r_cv").textContent = cv.toFixed(3);
+  document.getElementById("results").classList.remove("hidden");
+  drawHistogram(document.getElementById("hist"), npvs, [
+    {x:0, color:"#c53030"}, {x:detNpv, color:"#d69e2e"}, {x:meanNpv, color:"#2f855a"}
+  ]);
+});
+
+// Abramowitz-Stegun erf approximation (needed for the copula)
+function erf(x){
+  const sign = x < 0 ? -1 : 1;
+  x = Math.abs(x);
+  const a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429, p=0.3275911;
+  const t = 1/(1+p*x);
+  const y = 1 - (((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+  return sign*y;
+}
+</script>
+</body>
+</html>

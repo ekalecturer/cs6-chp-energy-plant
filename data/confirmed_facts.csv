@@ -1,0 +1,25 @@
+metric,value,unit,source
+deterministic_npv,598.5,EUR millions,Paper deterministic cash flow
+deterministic_irr,35,percent,Paper deterministic cash flow
+discount_rate,9,percent,Paper deterministic cash flow
+payback_period_operating,3,years,Paper deterministic cash flow
+payback_period_incl_construction,7,years,Paper deterministic cash flow
+project_operating_years,20,years,Paper project description
+construction_years,4,years,Paper project description
+gas_share_of_opex,80,percent,Paper project description
+mc_trials,50000,trials,Paper Monte Carlo section
+mc_mean_npv,172.9,EUR millions,Paper Monte Carlo results (Table 2)
+mc_median_npv,172.3,EUR millions,Paper Monte Carlo results (Table 2)
+mc_std_npv,160.2,EUR millions,Paper Monte Carlo results (Table 2)
+mc_cv_npv,0.9266,ratio,Paper Monte Carlo results (Table 2)
+mc_min_npv,-484,EUR millions,Paper Monte Carlo results (Table 2)
+mc_max_npv,832.4,EUR millions,Paper Monte Carlo results (Table 2)
+mc_skewness_npv,0.0089,ratio,Paper Monte Carlo results (Table 2)
+mc_kurtosis_npv,3.01,ratio,Paper Monte Carlo results (Table 2)
+mc_mean_irr,19,percent,Paper Monte Carlo results (Table 2)
+mc_std_irr,8,percent,Paper Monte Carlo results (Table 2)
+mc_cv_irr,0.4337,ratio,Paper Monte Carlo results (Table 2)
+mc_skewness_irr,0.6492,ratio,Paper Monte Carlo results (Table 2)
+mc_kurtosis_irr,4.09,ratio,Paper Monte Carlo results (Table 2)
+p_npv_positive,86.1,percent,Paper Monte Carlo section (Fig. 2 discussion)
+p_irr_clears_hurdle,91.1,percent,"Paper Monte Carlo section (results text; conclusion rounds to 91.9%, internal inconsistency disclosed)"

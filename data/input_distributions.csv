@@ -1,0 +1,5 @@
+variable,distribution_shape,parameters_disclosed_by_paper,notes
+Total revenue (electricity + thermal sales),Triangular,"Minimum, most likely, maximum (exact values not published)",Determined via expert opinion and historical data
+Variable cost (gas-dominated),Normal,"Mean, standard deviation (exact values not published)",Natural gas procurement is 80% of total operating costs
+Initial investment,Uniform,"Minimum, maximum (exact values not published)",No stated reason to favor any point in the range
+Discount rate,Triangular,"Minimum, most likely, maximum (exact values not published)",Base case discount rate is 9%

@@ -1,0 +1,12 @@
+variable,shock_percent,npv_after_change_eur_m,absolute_change_eur_m,relative_change_percent
+Electricity sale revenue,-10,358.1,240.4,40
+Natural gas procurement cost,10,442.9,155.6,26
+Discount rate,10,545.5,53.0,9
+Initial investment,10,570.8,27.7,5
+Thermal energy sale revenue,-10,573.2,25.3,4
+Income tax,10,591.8,6.7,1
+Maintenance cost,10,588.9,9.6,2
+Insurance premiums,10,596.1,2.4,0.4
+Obligations to the state,10,597.5,1.0,0.2
+Other costs,10,598.0,0.5,0.08
+NOx emissions tax,10,598.4,0.1,0.02
